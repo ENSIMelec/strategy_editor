@@ -47,9 +47,9 @@ public class EditorPanel extends JPanel{
 	JLabel labelVitesse = new JLabel("Speed (mm/sec) :");
 	JTextField strVitesse= new JTextField("400");
 	
-	/*ButtonGroup strSens = new ButtonGroup();
+	ButtonGroup strSens = new ButtonGroup();
 	JRadioButton strAvant = new JRadioButton("Avant");
-	JRadioButton strArriere = new JRadioButton("Arrière");*/
+	JRadioButton strArriere = new JRadioButton("Arrière");
 	
 	/*JLabel labelBlocage = new JLabel("Blocage :");
 	String[] listBlocage = new String[]{"aucun", "avant", "arriere", "avantG", "avantD", "arriereG", "arriereD"};
@@ -80,8 +80,8 @@ public class EditorPanel extends JPanel{
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
 		
-		/*strSens.add(strAvant);
-		strSens.add(strArriere);*/
+		strSens.add(strAvant);
+		strSens.add(strArriere);
 		
 		gbc.gridx=0;
 		gbc.gridwidth=2;
@@ -95,7 +95,7 @@ public class EditorPanel extends JPanel{
 		gb.setConstraints(labelX, gbc);
 		gb.setConstraints(labelY, gbc);
 		gb.setConstraints(labelAngle, gbc);
-		//gb.setConstraints(strAvant, gbc);
+		gb.setConstraints(strAvant, gbc);
 		gb.setConstraints(labelDeltaDeplacement, gbc);
 		gb.setConstraints(labelDeltaAngle, gbc);
 		gb.setConstraints(labelVitesse, gbc);
@@ -117,7 +117,7 @@ public class EditorPanel extends JPanel{
 		gb.setConstraints(strX,gbc);
 		gb.setConstraints(strY, gbc);
 		gb.setConstraints(strAngle, gbc);
-		//gb.setConstraints(strArriere, gbc);
+		gb.setConstraints(strArriere, gbc);
 		gb.setConstraints(strDeltaDeplacement, gbc);
 		gb.setConstraints(strDeltaAngle, gbc);
 		gb.setConstraints(strVitesse, gbc);
@@ -145,8 +145,8 @@ public class EditorPanel extends JPanel{
 		this.add(strY);
 		this.add(strAngle);
 		this.add(labelAngle);
-		//this.add(strAvant);
-		//this.add(strArriere);
+		this.add(strAvant);
+		this.add(strArriere);
 		this.add(strDeltaAngle);
 		this.add(labelDeltaAngle);
 		this.add(strDeltaDeplacement);
@@ -168,7 +168,7 @@ public class EditorPanel extends JPanel{
 		this.add(commentaireArea);
 		
 		
-//		strAvant.setSelected(true);
+		strAvant.setSelected(true);
 //		btnAttAction.setSelected(false);
 //		btnDerapage.setSelected(false);
 //		btnLissage.setSelected(false);
@@ -183,10 +183,10 @@ public class EditorPanel extends JPanel{
 		strAngle.addKeyListener(posChange);
 		strDeltaAngle.addKeyListener(setDeltaAngle);
 		strDeltaDeplacement.addKeyListener(setDeltaDeplacement);
-//		strAvant.addActionListener(avantSelected);
+		strAvant.addActionListener(avantSelected);
 //		btnAttAction.addActionListener(attActionSelected);
 //		btnDerapage.addActionListener(derapageSelected);
-//		strArriere.addActionListener(arriereSelected);
+		strArriere.addActionListener(arriereSelected);
 //		strBlocage.addActionListener(blocageSelected);
 		strVitesse.addKeyListener(setVitesse);
 		strTimeout.addKeyListener(setTimeout);
@@ -277,16 +277,16 @@ public class EditorPanel extends JPanel{
 		}
 	};
 	
-//	ActionListener avantSelected = new ActionListener(){
-//		public void actionPerformed(ActionEvent e) {
-//			actualRobot.setSens("avant");
-//		}
-//	};
-//	ActionListener arriereSelected = new ActionListener(){
-//		public void actionPerformed(ActionEvent e) {
-//			actualRobot.setSens("arriere");
-//		}
-//	};
+	ActionListener avantSelected = new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			actualRobot.setSens("avant");
+		}
+	};
+	ActionListener arriereSelected = new ActionListener(){
+		public void actionPerformed(ActionEvent e) {
+			actualRobot.setSens("arriere");
+		}
+	};
 	
 //	ActionListener blocageSelected = new ActionListener(){
 //		public void actionPerformed(ActionEvent e) {
@@ -324,8 +324,8 @@ public class EditorPanel extends JPanel{
 		strX.setEnabled(true);
 		strY.setEnabled(true);
 		strAngle.setEnabled(true);
-//		strAvant.setEnabled(true);
-//		strArriere.setEnabled(true);
+		strAvant.setEnabled(true);
+		strArriere.setEnabled(true);
 		strDeltaAngle.setEnabled(true);
 		strDeltaDeplacement.setEnabled(true);
 		strVitesse.setEnabled(true);
@@ -340,8 +340,8 @@ public class EditorPanel extends JPanel{
 			case "THETA":{
 				strX.setEnabled(false);
 				strY.setEnabled(false);
-//				strAvant.setEnabled(false);
-//				strArriere.setEnabled(false);
+				strAvant.setEnabled(false);
+				strArriere.setEnabled(false);
 				strDeltaDeplacement.setEnabled(false);
 //				strCoefCourbe.setEnabled(false);
 //				btnLissage.setEnabled(false);
@@ -350,7 +350,7 @@ public class EditorPanel extends JPanel{
 			}
 			
 			case "XY_ABSOLU":{
-				strAngle.setEnabled(false);
+				//strAngle.setEnabled(false);
 				break;
 			}
 			case "POSITION":{

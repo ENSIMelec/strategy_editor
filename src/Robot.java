@@ -26,7 +26,7 @@ public class Robot {
 		x=0;
 		y=0;
 		angle=0;
-		deltaDeplacement=30;
+		deltaDeplacement=10;
 		deltaAngle=1;
 		vitesse=400;
 		sens="avant";
@@ -44,7 +44,7 @@ public class Robot {
 		this.x=x;
 		this.y=y;
 		angle=r;
-		deltaDeplacement=30;
+		deltaDeplacement=10;
 		deltaAngle=1;
 		vitesse=400;
 		sens="avant";
