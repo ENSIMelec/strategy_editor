@@ -201,7 +201,7 @@ public class EditorPanel extends JPanel{
 		   public void actionPerformed(ActionEvent e) {
 
 		   	  actualRobot = new Robot(actualRobot);
-			  actualRobot.setType("XY_ABSOLU");
+			  //actualRobot.setType("XY_ABSOLU");
 			  stepList.add(list.getSelectedIndex()+1, actualRobot);
 		      //stepList.addElement(actualRobot);
 		      //list.ensureIndexIsVisible(list.getModel().getSize()-1);
@@ -350,7 +350,7 @@ public class EditorPanel extends JPanel{
 			}
 			
 			case "XY_ABSOLU":{
-				//strAngle.setEnabled(false);
+				strAngle.setEnabled(false);
 				break;
 			}
 			case "POSITION":{
@@ -448,13 +448,13 @@ public class EditorPanel extends JPanel{
     		strX.setText(String.valueOf(actualRobot.getX()));
     		strY.setText(String.valueOf(actualRobot.getY()));
     		strAngle.setText(String.valueOf(actualRobot.getAngle()));
-//    		if(actualRobot.getSens().equals("avant")) {
-//    			strAvant.setSelected(true);
-//    			strArriere.setSelected(false);
-//    		}else {
-//    			strAvant.setSelected(false);
-//    			strArriere.setSelected(true);
-//    		}
+    		if(actualRobot.getSens().equals("avant")) {
+    			strAvant.setSelected(true);
+    			strArriere.setSelected(false);
+    		}else {
+    			strAvant.setSelected(false);
+    			strArriere.setSelected(true);
+    		}
     		strDeltaAngle.setText(String.valueOf(actualRobot.getDeltaAngle()));
     		strDeltaDeplacement.setText(String.valueOf(actualRobot.getDeltaDeplacement()));
     		strVitesse.setText(String.valueOf(actualRobot.getVitesse()));
@@ -478,10 +478,16 @@ public class EditorPanel extends JPanel{
 					Robot old = EditorPanel.stepList.getElementAt(EditorPanel.list.getSelectedIndex()-1);
 					Robot actual = EditorPanel.stepList.getElementAt(EditorPanel.list.getSelectedIndex());
 					
-					if(EditorPanel.actualRobot.getSens().equals("arriere")) {
+					/*if(EditorPanel.actualRobot.getSens().equals("arriere")) {
 						theta=(int) (Math.atan2((double)(actual.getX()-old.getX()),(double)(actual.getY()-old.getY()))*180/Math.PI)-180;
 					}else {
 						theta=(int) (Math.atan2((double)(actual.getX()-old.getX()),(double)(actual.getY()-old.getY()))*180/Math.PI);				
+					}*/
+
+					if(EditorPanel.actualRobot.getSens().equals("arriere")) {
+						theta=(int) (Math.atan2((double)(actual.getY()-old.getY()),(double)(actual.getX()-old.getX()))*180/Math.PI)-180;
+					}else {
+						theta=(int) (Math.atan2((double)(actual.getY()-old.getY()),(double)(actual.getX()-old.getX()))*180/Math.PI);
 					}
 					EditorPanel.actualRobot.setAngle(theta);
 				}

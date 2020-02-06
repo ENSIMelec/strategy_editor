@@ -93,11 +93,18 @@ public class TablePanel extends JPanel {
 			if(EditorPanel.list.getSelectedIndex()!=0){
 				Robot old = EditorPanel.stepList.getElementAt(EditorPanel.list.getSelectedIndex()-1);
 				Robot actual = EditorPanel.stepList.getElementAt(EditorPanel.list.getSelectedIndex());
-				
-				if(EditorPanel.actualRobot.getSens().equals("arriere")) {
+
+
+				/*if(EditorPanel.actualRobot.getSens().equals("arriere")) {
 					theta=(int) (Math.atan2((double)(actual.getX()-old.getX()),(double)(actual.getY()-old.getY()))*180/Math.PI)-180;
 				}else {
 					theta=(int) (Math.atan2((double)(actual.getX()-old.getX()),(double)(actual.getY()-old.getY()))*180/Math.PI);				
+				}*/
+
+				if(EditorPanel.actualRobot.getSens().equals("arriere")) {
+					theta=(int) (Math.atan2((double)(actual.getY()-old.getY()),(double)(actual.getX()-old.getX()))*180/Math.PI)-180;
+				}else {
+					theta=(int) (Math.atan2((double)(actual.getY()-old.getY()),(double)(actual.getX()-old.getX()))*180/Math.PI);
 				}
 				EditorPanel.actualRobot.setAngle(theta);
 			}
@@ -159,6 +166,7 @@ public class TablePanel extends JPanel {
 			}
 		}
 		AffineTransform at = AffineTransform.getTranslateInstance(r.getDispX(), r.getDispY());
+		System.out.println(at);
 		if(Main.robot.equals("roballs")) {
 			at.rotate(Math.toRadians(EditorPanel.actualRobot.getRealAngle()),45,60); //0 � changer par l'angle
 		}else {

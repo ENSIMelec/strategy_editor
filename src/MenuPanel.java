@@ -121,7 +121,7 @@ public class MenuPanel extends JPanel{
 						point.put("type", r.getType());
 						point.put("X", r.getX());
 						point.put("Y", r.getY());
-						point.put("THETA", r.getAngle());
+						//point.put("THETA", r.getAngle());
 						point.put("speed", r.getVitesse());
 						point.put("timeout", r.getTimeOut());
 						point.put("action", r.getAction());
@@ -301,7 +301,7 @@ public class MenuPanel extends JPanel{
 							r.setCommentaire((String)params.get("comments"));
 							r.setX(Math.toIntExact((Long)params.get("X")));
 							r.setY(Math.toIntExact((Long)params.get("Y")));
-							r.setAngle(Math.toIntExact((Long)params.get("THETA")));
+							//r.setAngle(Math.toIntExact((Long)params.get("THETA")));
 							r.setDeltaDeplacement(Math.toIntExact((Long)params.get("distance_tolerance")));
 							r.setDeltaAngle((Double)params.get("angle_tolerance"));
 							r.setVitesse(Math.toIntExact((Long)params.get("speed")));

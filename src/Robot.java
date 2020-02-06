@@ -84,15 +84,22 @@ public class Robot {
 		this.x = x;
 	}
 	
-	int getDispX(){
+	/*int getDispX(){
 		return (getX()*3/10)+405;
 	}
 	int getDispY(){
 		return  541-(getY()*3/10);
+	}*/
+
+	int getDispX(){
+		return (getX()*3/10);
+	}
+	int getDispY(){
+		return  (getY()*3/10);
 	}
 	
 	
-	static int dispXToReal(int x){
+	/*static int dispXToReal(int x){
 		if(Main.robot.equals("roballs")) {
 			return (x*10/3)-1500;
 		}else {
@@ -104,6 +111,23 @@ public class Robot {
 	static int dispYToReal(int y){
 		if(Main.robot.equals("roballs")) {
 			return 2000-(y*10/3);
+		}else {
+			return 0;
+			//TODO coord Y bobby
+		}
+	}*/
+	static int dispXToReal(int x){
+		if(Main.robot.equals("roballs")) {
+			return (x*10/3)-142;
+		}else {
+			return 0;
+			//TODO coord X bobby
+		}
+	}
+
+	static int dispYToReal(int y){
+		if(Main.robot.equals("roballs")) {
+			return (y*10/3)-192;
 		}else {
 			return 0;
 			//TODO coord Y bobby
@@ -126,7 +150,7 @@ public class Robot {
 	}
 	
 	public int getRealAngle() {
-		return angle;
+		return angle + 90;
 	}
 	
 	String getType(){
