@@ -150,7 +150,7 @@ public class Robot {
 	}
 	
 	public int getRealAngle() {
-		return angle + 90;
+		return -(angle-90);
 	}
 	
 	String getType(){

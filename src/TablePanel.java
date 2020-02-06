@@ -32,17 +32,18 @@ public class TablePanel extends JPanel {
 		drawRobot(g2d, EditorPanel.actualRobot);
 		if(drawLine)drawLine(g2d);
 	}
-	
-	KeyListener keyPressed = new KeyListener(){//Translation du robot avec les fl�ches
+
+	//Transition
+	KeyListener keyPressed = new KeyListener(){
 		public void keyPressed(KeyEvent e){
-			if(e.getKeyCode()==KeyEvent.VK_UP) EditorPanel.actualRobot.setY(EditorPanel.actualRobot.getY()+1);
-			if(e.getKeyCode()==KeyEvent.VK_DOWN) EditorPanel.actualRobot.setY(EditorPanel.actualRobot.getY()-1);
+			if(e.getKeyCode()==KeyEvent.VK_UP) EditorPanel.actualRobot.setY(EditorPanel.actualRobot.getY()-1);
+			if(e.getKeyCode()==KeyEvent.VK_DOWN) EditorPanel.actualRobot.setY(EditorPanel.actualRobot.getY()+1);
 			if(e.getKeyCode()==KeyEvent.VK_RIGHT) EditorPanel.actualRobot.setX(EditorPanel.actualRobot.getX()+1);
 			if(e.getKeyCode()==KeyEvent.VK_LEFT) EditorPanel.actualRobot.setX(EditorPanel.actualRobot.getX()-1);
 			if(EditorPanel.list.getSelectedIndex()!=0){
 				Robot old = EditorPanel.stepList.getElementAt(EditorPanel.list.getSelectedIndex()-1);
 				Robot actual = EditorPanel.stepList.getElementAt(EditorPanel.list.getSelectedIndex());
-				int theta=(int) ((int)Math.atan((double)(old.getX()-actual.getX())/(double)(old.getY()-actual.getY()))*180/Math.PI);
+				int theta = (int) (Math.atan2((double)(actual.getY()-old.getY()),(double)(actual.getX()-old.getX()))*180/Math.PI);
 				EditorPanel.actualRobot.setAngle(theta);
 			}
 			EditorPanel.updateCoord();
@@ -94,19 +95,12 @@ public class TablePanel extends JPanel {
 				Robot old = EditorPanel.stepList.getElementAt(EditorPanel.list.getSelectedIndex()-1);
 				Robot actual = EditorPanel.stepList.getElementAt(EditorPanel.list.getSelectedIndex());
 
-
-				/*if(EditorPanel.actualRobot.getSens().equals("arriere")) {
-					theta=(int) (Math.atan2((double)(actual.getX()-old.getX()),(double)(actual.getY()-old.getY()))*180/Math.PI)-180;
-				}else {
-					theta=(int) (Math.atan2((double)(actual.getX()-old.getX()),(double)(actual.getY()-old.getY()))*180/Math.PI);				
-				}*/
-
 				if(EditorPanel.actualRobot.getSens().equals("arriere")) {
 					theta=(int) (Math.atan2((double)(actual.getY()-old.getY()),(double)(actual.getX()-old.getX()))*180/Math.PI)-180;
 				}else {
 					theta=(int) (Math.atan2((double)(actual.getY()-old.getY()),(double)(actual.getX()-old.getX()))*180/Math.PI);
 				}
-				EditorPanel.actualRobot.setAngle(theta);
+				EditorPanel.actualRobot.setAngle(-theta);
 			}
 			EditorPanel.updateCoord();
 			repaint();
@@ -173,7 +167,9 @@ public class TablePanel extends JPanel {
 			at.rotate(Math.toRadians(EditorPanel.actualRobot.getRealAngle()),45,60); //0 � changer par l'angle
 			//TODO edit le point de pivot
 		}
+
 		g2d.drawImage(robotImg,at,this);
+
 		//g2d.drawRect(EditorPanel.actualRobot.getDispX(), EditorPanel.actualRobot.getDispY(), 90, 91);
 		g2d.setColor(new Color(255,0,0));
 		if(Main.robot.equals("roballs")) {

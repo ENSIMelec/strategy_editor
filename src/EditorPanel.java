@@ -32,7 +32,7 @@ public class EditorPanel extends JPanel{
 	static JTextField strX = new JTextField("0");
 	JLabel labelX = new JLabel("X :");
 	
-	static JTextField strY= new JTextField("150");
+	static JTextField strY= new JTextField("0");
 	JLabel labelY = new JLabel("Y :");
 	
 	static JTextField strAngle = new JTextField("0");
@@ -130,7 +130,7 @@ public class EditorPanel extends JPanel{
 		gb.setConstraints(strAction, gbc);
 		
 		
-		actualRobot = new Robot(0,150, 0);
+		actualRobot = new Robot(0,0, 0);
 		stepList.addElement(actualRobot);
 		list.setSelectedIndex(0);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -477,19 +477,13 @@ public class EditorPanel extends JPanel{
 				if(EditorPanel.actualRobot.getType().equals("XY_ABSOLU") || EditorPanel.actualRobot.getType().equals("DeplacementRelatif")) {
 					Robot old = EditorPanel.stepList.getElementAt(EditorPanel.list.getSelectedIndex()-1);
 					Robot actual = EditorPanel.stepList.getElementAt(EditorPanel.list.getSelectedIndex());
-					
-					/*if(EditorPanel.actualRobot.getSens().equals("arriere")) {
-						theta=(int) (Math.atan2((double)(actual.getX()-old.getX()),(double)(actual.getY()-old.getY()))*180/Math.PI)-180;
-					}else {
-						theta=(int) (Math.atan2((double)(actual.getX()-old.getX()),(double)(actual.getY()-old.getY()))*180/Math.PI);				
-					}*/
 
 					if(EditorPanel.actualRobot.getSens().equals("arriere")) {
 						theta=(int) (Math.atan2((double)(actual.getY()-old.getY()),(double)(actual.getX()-old.getX()))*180/Math.PI)-180;
 					}else {
 						theta=(int) (Math.atan2((double)(actual.getY()-old.getY()),(double)(actual.getX()-old.getX()))*180/Math.PI);
 					}
-					EditorPanel.actualRobot.setAngle(theta);
+					EditorPanel.actualRobot.setAngle(-theta);
 				}
 			}
 			EditorFrame.update();
@@ -513,7 +507,7 @@ public class EditorPanel extends JPanel{
 	 
 	public static void updateCoord(){//Mise à jour des coordonnée pour ne pas pouvoir sortir de la table
 		if(actualRobot.getAngle()<-180) actualRobot.setAngle(360-Math.abs(actualRobot.getAngle()));
-		if(actualRobot.getAngle()>180) actualRobot.setAngle(-Math.abs(actualRobot.getAngle()));
+		if(actualRobot.getAngle()>180) actualRobot.setAngle(Math.abs(actualRobot.getAngle()));
 
     	strX.setText(String.valueOf(actualRobot.getX()));
     	strY.setText(String.valueOf(actualRobot.getY()));

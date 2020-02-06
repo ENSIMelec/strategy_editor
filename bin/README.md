@@ -1,2 +1,0 @@
-ENSIM'Elec Strategy Editor
-------------------------------
