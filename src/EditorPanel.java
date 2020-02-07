@@ -329,13 +329,14 @@ public class EditorPanel extends JPanel{
 		strDeltaAngle.setEnabled(true);
 		strDeltaDeplacement.setEnabled(true);
 		strVitesse.setEnabled(true);
+        strAction.setEnabled(true);
+        strTimeout.setEnabled(true);
+        
 //		strCoefCourbe.setEnabled(true);
 //		strBlocage.setEnabled(true);
 //		btnLissage.setEnabled(true);
 //		btnDerapage.setEnabled(true);
 //		btnAttAction.setEnabled(true);
-		//strTimeout.setEnabled(true);
-		//strAction.setEnabled(true);
 		switch(type) {
 			case "THETA":{
 				strX.setEnabled(false);
