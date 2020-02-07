@@ -100,7 +100,7 @@ public class TablePanel extends JPanel {
 				}else {
 					theta=(int) (Math.atan2((double)(actual.getY()-old.getY()),(double)(actual.getX()-old.getX()))*180/Math.PI);
 				}
-				EditorPanel.actualRobot.setAngle(-theta);
+				EditorPanel.actualRobot.setAngle(theta);
 			}
 			EditorPanel.updateCoord();
 			repaint();
@@ -109,7 +109,7 @@ public class TablePanel extends JPanel {
 		@Override
 		public void mouseMoved(MouseEvent e) {
 		}
-		
+
 		};
 		
 		MouseListener pressed = new MouseListener(){

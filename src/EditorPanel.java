@@ -484,7 +484,7 @@ public class EditorPanel extends JPanel{
 					}else {
 						theta=(int) (Math.atan2((double)(actual.getY()-old.getY()),(double)(actual.getX()-old.getX()))*180/Math.PI);
 					}
-					EditorPanel.actualRobot.setAngle(-theta);
+					EditorPanel.actualRobot.setAngle(theta);
 				}
 			}
 			EditorFrame.update();
