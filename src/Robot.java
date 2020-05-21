@@ -1,6 +1,7 @@
 
 public class Robot {
 
+
 	private String type;
 	private int x;
 	private int y;
@@ -92,7 +93,7 @@ public class Robot {
 	}*/
 
 	int getDispX(){
-		return ((getX()*3/10)-46);
+		return ((getX()*3/10)-42);
 	}
 	int getDispY(){
 		return  ((getY()*3/10)-59);
@@ -118,7 +119,7 @@ public class Robot {
 	static int dispXToReal(int x){
 
 		if(Main.robot.equals("roballs")) {
-			return (x*10/3);
+			return (x*10/3)-91;
 		}else {
 			return 0;
 			//TODO coord X bobby
@@ -127,7 +128,7 @@ public class Robot {
 
 	static int dispYToReal(int y){
 		if(Main.robot.equals("roballs")) {
-			return (y*10/3)-2000;
+			return -((y*10/3)-2000);
 		}else {
 			return 0;
 			//TODO coord Y bobby
@@ -135,7 +136,7 @@ public class Robot {
 	}
 	
 	int getY(){
-		return -y;
+		return y;
 	}
 	void setY(int y){
 		this.y = y;

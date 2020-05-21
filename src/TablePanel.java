@@ -85,7 +85,7 @@ public class TablePanel extends JPanel {
 	 */
 	MouseWheelListener wheelRotate = new MouseWheelListener(){
 		public void mouseWheelMoved(MouseWheelEvent e) {
-			EditorPanel.actualRobot.setAngle(EditorPanel.actualRobot.getAngle()+e.getWheelRotation()*2);
+			EditorPanel.actualRobot.setAngle(EditorPanel.actualRobot.getAngle()-e.getWheelRotation()*2);
 			EditorPanel.updateCoord();
 			repaint();
 			
