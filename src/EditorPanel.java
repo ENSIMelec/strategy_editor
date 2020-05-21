@@ -130,6 +130,7 @@ public class EditorPanel extends JPanel{
 		gb.setConstraints(strAction, gbc);
 		
 		
+		//actualRobot = new Robot(144,824, 0);
 		actualRobot = new Robot(0,0, 0);
 		stepList.addElement(actualRobot);
 		list.setSelectedIndex(0);

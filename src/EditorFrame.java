@@ -7,7 +7,7 @@ public class EditorFrame extends JFrame{
 	static TablePanel TPanel= new TablePanel();
 	public EditorFrame(){
 		super("ENSIM'ELEC Strategy Editor");
-		this.setSize(1105, 665);
+		this.setSize(1300, 800);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		this.add(TPanel, BorderLayout.CENTER);

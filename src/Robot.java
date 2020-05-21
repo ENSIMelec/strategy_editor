@@ -23,8 +23,8 @@ public class Robot {
 	
 	public Robot(){
 		type = "POSITION";
-		x=0;
-		y=0;
+		x=144;
+		y=824;
 		angle=0;
 		deltaDeplacement=10;
 		deltaAngle=1;
@@ -92,12 +92,11 @@ public class Robot {
 	}*/
 
 	int getDispX(){
-		return (getX()*3/10);
+		return ((getX()*3/10)-46);
 	}
 	int getDispY(){
-		return  (getY()*3/10);
+		return  ((getY()*3/10)-59);
 	}
-	
 	
 	/*static int dispXToReal(int x){
 		if(Main.robot.equals("roballs")) {
@@ -107,7 +106,7 @@ public class Robot {
 			//TODO coord X bobby
 		}
 	}
-	
+
 	static int dispYToReal(int y){
 		if(Main.robot.equals("roballs")) {
 			return 2000-(y*10/3);
@@ -117,8 +116,9 @@ public class Robot {
 		}
 	}*/
 	static int dispXToReal(int x){
+
 		if(Main.robot.equals("roballs")) {
-			return (x*10/3)-142;
+			return (x*10/3);
 		}else {
 			return 0;
 			//TODO coord X bobby
@@ -127,7 +127,7 @@ public class Robot {
 
 	static int dispYToReal(int y){
 		if(Main.robot.equals("roballs")) {
-			return (y*10/3)-192;
+			return (y*10/3)-2000;
 		}else {
 			return 0;
 			//TODO coord Y bobby
@@ -135,7 +135,7 @@ public class Robot {
 	}
 	
 	int getY(){
-		return y;
+		return -y;
 	}
 	void setY(int y){
 		this.y = y;
@@ -148,10 +148,13 @@ public class Robot {
 	public void setAngle(int a) {
 		angle = a;
 	}
-	
+
 	public int getRealAngle() {
 		return (angle+90);
 	}
+	/*public int getRealAngle() {
+		return (angle);
+	}*/
 	
 	String getType(){
 		return type;

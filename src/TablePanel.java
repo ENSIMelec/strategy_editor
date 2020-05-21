@@ -6,9 +6,21 @@ import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 import java.io.IOException;
 
+/**
+ * Author : Canyon
+ * Edited by
+ * @Ta0uf19
+ *
+ * TODO:
+ *  - fix up, down key
+ */
+
 public class TablePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	
+
+	private static int WEIGHT_PADDING_PX = 30;
+	private static int HEIGHT_PADDING_PX = 600;
+
 	Image tableImg, robotImg;
 	static boolean drawLine;
 	
@@ -28,6 +40,12 @@ public class TablePanel extends JPanel {
 	
 	public void paintComponent(Graphics g){//Affichage de la table et tout les �l�ments dessus
 		Graphics2D g2d = (Graphics2D)g;
+		AffineTransform at = g2d.getTransform();
+
+		g2d.translate(WEIGHT_PADDING_PX, HEIGHT_PADDING_PX);
+		// inverser le plan
+		g2d.scale(1, -1);
+
 		g.drawImage(tableImg, 0, 0, this);
 		drawRobot(g2d, EditorPanel.actualRobot);
 		if(drawLine)drawLine(g2d);
@@ -36,14 +54,15 @@ public class TablePanel extends JPanel {
 	//Transition
 	KeyListener keyPressed = new KeyListener(){
 		public void keyPressed(KeyEvent e){
-			if(e.getKeyCode()==KeyEvent.VK_UP) EditorPanel.actualRobot.setY(EditorPanel.actualRobot.getY()-1);
-			if(e.getKeyCode()==KeyEvent.VK_DOWN) EditorPanel.actualRobot.setY(EditorPanel.actualRobot.getY()+1);
+			if(e.getKeyCode()==KeyEvent.VK_UP) EditorPanel.actualRobot.setY(EditorPanel.actualRobot.getY()+1);
+			if(e.getKeyCode()==KeyEvent.VK_DOWN) EditorPanel.actualRobot.setY(EditorPanel.actualRobot.getY()-1);
 			if(e.getKeyCode()==KeyEvent.VK_RIGHT) EditorPanel.actualRobot.setX(EditorPanel.actualRobot.getX()+1);
 			if(e.getKeyCode()==KeyEvent.VK_LEFT) EditorPanel.actualRobot.setX(EditorPanel.actualRobot.getX()-1);
 			if(EditorPanel.list.getSelectedIndex()!=0){
 				Robot old = EditorPanel.stepList.getElementAt(EditorPanel.list.getSelectedIndex()-1);
 				Robot actual = EditorPanel.stepList.getElementAt(EditorPanel.list.getSelectedIndex());
 				int theta = (int) (Math.atan2((double)(actual.getY()-old.getY()),(double)(actual.getX()-old.getX()))*180/Math.PI);
+				//int theta=(int) ((int)Math.atan((double)(old.getX()-actual.getX())/(double)(old.getY()-actual.getY()))*180/Math.PI);
 				EditorPanel.actualRobot.setAngle(theta);
 			}
 			EditorPanel.updateCoord();
@@ -60,8 +79,11 @@ public class TablePanel extends JPanel {
 		public void keyTyped(KeyEvent arg0) {
 		}
 	};
-	
-	MouseWheelListener wheelRotate = new MouseWheelListener(){//Rotation du robot avec la molette
+
+	/**
+	 * Rotation du robot avec la molette
+	 */
+	MouseWheelListener wheelRotate = new MouseWheelListener(){
 		public void mouseWheelMoved(MouseWheelEvent e) {
 			EditorPanel.actualRobot.setAngle(EditorPanel.actualRobot.getAngle()+e.getWheelRotation()*2);
 			EditorPanel.updateCoord();
@@ -69,11 +91,14 @@ public class TablePanel extends JPanel {
 			
 		}
 	};
-	MouseMotionListener mooved = new MouseMotionListener(){//Deplacement du robot avec la souris
+	/**
+	 * Déplacement du robot avec la souris
+	 */
+	MouseMotionListener mooved = new MouseMotionListener(){
 
 		@Override
 		public void mouseDragged(MouseEvent e) {
-			if(EditorPanel.list.getSelectedIndex()!=0){
+			/*if(EditorPanel.list.getSelectedIndex()!=0){
 				if(EditorPanel.actualRobot.getType().equals("DeplacementX")) {
 					EditorPanel.actualRobot.setX(Robot.dispXToReal(e.getX()));
 					EditorPanel.actualRobot.setY(EditorPanel.stepList.getElementAt(EditorPanel.list.getSelectedIndex()-1).getY());
@@ -84,10 +109,15 @@ public class TablePanel extends JPanel {
 					EditorPanel.actualRobot.setX(Robot.dispXToReal(e.getX()));
 					EditorPanel.actualRobot.setY(Robot.dispYToReal(e.getY()));
 				}
+				EditorPanel.actualRobot.setX(Robot.dispXToReal(e.getX()));
+				EditorPanel.actualRobot.setY(Robot.dispYToReal(e.getY()));
 			}else {
 				EditorPanel.actualRobot.setX(Robot.dispXToReal(e.getX()));
 				EditorPanel.actualRobot.setY(Robot.dispYToReal(e.getY()));
-			}
+			}*/
+
+			EditorPanel.actualRobot.setX(Robot.dispXToReal(e.getX()));
+			EditorPanel.actualRobot.setY(Robot.dispYToReal(e.getY()));
 
 
 			int theta=0;
@@ -160,7 +190,7 @@ public class TablePanel extends JPanel {
 			}
 		}
 		AffineTransform at = AffineTransform.getTranslateInstance(r.getDispX(), r.getDispY());
-		System.out.println(at);
+		//System.out.println(at);
 		if(Main.robot.equals("roballs")) {
 			at.rotate(Math.toRadians(EditorPanel.actualRobot.getRealAngle()),45,60); //0 � changer par l'angle
 		}else {
@@ -179,7 +209,11 @@ public class TablePanel extends JPanel {
 			//TODO edit le point de pivot
 		}
 	}
-	
+
+	/**
+	 * Drawline stratégie
+	 * @param g
+	 */
 	public void drawLine(Graphics2D g){
 		 ListModel<Robot> liste = EditorPanel.list.getModel();
 		 for(int i=0; i<liste.getSize()-1;i++){
