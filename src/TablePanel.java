@@ -1,4 +1,3 @@
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -21,6 +20,8 @@ public class TablePanel extends JPanel {
 	private static int WEIGHT_PADDING_PX = 30;
 	private static int HEIGHT_PADDING_PX = 600;
 
+	private int currentX, currentY, oldX = 0, oldY = 0;
+
 	Image tableImg, robotImg;
 	static boolean drawLine;
 	
@@ -39,6 +40,7 @@ public class TablePanel extends JPanel {
 	}
 	
 	public void paintComponent(Graphics g){//Affichage de la table et tout les �l�ments dessus
+		//super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D)g;
 		AffineTransform at = g2d.getTransform();
 
@@ -49,7 +51,33 @@ public class TablePanel extends JPanel {
 		g.drawImage(tableImg, 0, 0, this);
 		drawRobot(g2d, EditorPanel.actualRobot);
 		if(drawLine)drawLine(g2d);
+
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		//drawSimulation(g2d);
+
 	}
+
+	/**
+	 * Drawline for simulation
+	 * @param g
+	 */
+	/*private void drawSimulation(Graphics2D g) {
+
+		currentX = EditorPanel.actualRobot.getDispX()+45;
+		currentY = EditorPanel.actualRobot.getDispY()+60;
+
+
+				//System.out.println(" i drawn !!");
+		g.setColor(new Color(255, 80, 44));
+		g.setStroke(new BasicStroke(2f));
+
+		g.drawLine(oldX, oldY,
+				currentX, currentY);
+
+		oldX = currentX;
+		oldY = currentY;
+
+	}*/
 
 	//Transition
 	KeyListener keyPressed = new KeyListener(){
