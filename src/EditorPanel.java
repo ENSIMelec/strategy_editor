@@ -383,38 +383,38 @@ public class EditorPanel extends JPanel{
 //
 			case "CALIB_X":{
 				strY.setEnabled(false);
-//				strAvant.setEnabled(false);
-//				strArriere.setEnabled(false);
+				//strAvant.setEnabled(false);
+				//strArriere.setEnabled(false);
 				strDeltaAngle.setEnabled(false);
 				strDeltaDeplacement.setEnabled(false);
 				strVitesse.setEnabled(false);
 //				strCoefCourbe.setEnabled(false);
 //				strBlocage.setEnabled(false);
 //				btnLissage.setEnabled(false);
-//				btnDerapage.setEnabled(false);
+				btnDerapage.setEnabled(false);
 //				btnAttAction.setEnabled(false);
 				break;
 			}
 			case "CALIB_Y":{
 				strX.setEnabled(false);
-//				strAvant.setEnabled(false);
-//				strArriere.setEnabled(false);
+				//strAvant.setEnabled(false);
+				//strArriere.setEnabled(false);
 				strDeltaAngle.setEnabled(false);
 				strDeltaDeplacement.setEnabled(false);
 				strVitesse.setEnabled(false);
 //				strCoefCourbe.setEnabled(false);
 //				strBlocage.setEnabled(false);
 //				btnLissage.setEnabled(false);
-//				btnDerapage.setEnabled(false);
+				btnDerapage.setEnabled(false);
 //				btnAttAction.setEnabled(false);
 				break;
 			}
 			case "CALIB_XY":{
-				strAvant.setEnabled(false);
-				strArriere.setEnabled(false);
+				//strAvant.setEnabled(false);
+				//strArriere.setEnabled(false);
 				strDeltaAngle.setEnabled(false);
 				strDeltaDeplacement.setEnabled(false);
-//				strVitesse.setEnabled(false);
+				strVitesse.setEnabled(false);
 //				strCoefCourbe.setEnabled(false);
 //				strBlocage.setEnabled(false);
 //				btnLissage.setEnabled(false);
