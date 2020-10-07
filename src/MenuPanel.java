@@ -492,8 +492,9 @@ public class MenuPanel extends JPanel{
 				 ListModel<Robot> liste = EditorPanel.list.getModel();
 				 EditorPanel.updateCoord();
 				 for(int i=0; i<liste.getSize();i++){
-					 liste.getElementAt(i).setX(-liste.getElementAt(i).getX());
-					 liste.getElementAt(i).setAngle(-liste.getElementAt(i).getAngle());
+					 liste.getElementAt(i).setX(3000-liste.getElementAt(i).getX());
+					 liste.getElementAt(i).setY(2000-liste.getElementAt(i).getY());
+					 liste.getElementAt(i).setAngle(liste.getElementAt(i).getAngle()+180);
 				 }
 		   }
 	};
