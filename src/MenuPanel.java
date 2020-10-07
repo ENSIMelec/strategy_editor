@@ -56,9 +56,10 @@ public class MenuPanel extends JPanel{
 		menuInverse.addActionListener(inverseStrat);
 		//menuInverse.setEnabled(false);
 		
-		 roballs = new JRadioButton("Roballs");
+		 roballs = new JRadioButton("Krabs");
 		 roballs.setSelected(true);
 		 bobby = new JRadioButton("Bobby 5K");
+		 bobby.setEnabled(false);
 		 robot_grp = new ButtonGroup();
 		 robot_grp.add(roballs);
 		 robot_grp.add(bobby);
@@ -333,7 +334,12 @@ public class MenuPanel extends JPanel{
 							//r.setBlocage((String)params.get("blocage"));
 							//r.setCoefCourbe((Double)params.get("coefCourbe"));
 							//r.setLissage((boolean)params.get("lissage"));
-							r.setDerapage((boolean)params.get("slipping"));
+							if(params.get("slipping") == null) {
+								r.setDerapage(false);
+							}
+							else {
+								r.setDerapage((boolean)params.get("slipping"));
+							}
 							r.setTimeOut(Math.toIntExact((Long)params.get("timeout")));
 							r.setAction((String)params.get("action"));
 							//r.setAttAction((boolean)params.get("attAction"));
@@ -493,8 +499,8 @@ public class MenuPanel extends JPanel{
 				 EditorPanel.updateCoord();
 				 for(int i=0; i<liste.getSize();i++){
 					 liste.getElementAt(i).setX(3000-liste.getElementAt(i).getX());
-					 liste.getElementAt(i).setY(2000-liste.getElementAt(i).getY());
-					 liste.getElementAt(i).setAngle(liste.getElementAt(i).getAngle()+180);
+					 liste.getElementAt(i).setY(liste.getElementAt(i).getY());
+					 liste.getElementAt(i).setAngle((180-liste.getElementAt(i).getAngle()) % 360);
 				 }
 		   }
 	};
