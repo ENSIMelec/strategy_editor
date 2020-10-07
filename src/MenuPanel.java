@@ -56,9 +56,10 @@ public class MenuPanel extends JPanel{
 		menuInverse.addActionListener(inverseStrat);
 		//menuInverse.setEnabled(false);
 		
-		 roballs = new JRadioButton("Roballs");
+		 roballs = new JRadioButton("Krabs");
 		 roballs.setSelected(true);
 		 bobby = new JRadioButton("Bobby 5K");
+		 bobby.setEnabled(false);
 		 robot_grp = new ButtonGroup();
 		 robot_grp.add(roballs);
 		 robot_grp.add(bobby);
@@ -127,6 +128,7 @@ public class MenuPanel extends JPanel{
 						point.put("action", r.getAction());
 						point.put("distance_tolerance", r.getDeltaDeplacement());
 						point.put("angle_tolerance", r.getDeltaAngle());
+						point.put("slipping", r.getDerapage());
 						//point.put("attAction", r.getAttAction());
 						break;
 					}
@@ -143,6 +145,29 @@ public class MenuPanel extends JPanel{
 						point.put("timeOut", r.getTimeOut());
 						point.put("action", r.getAction());
 						point.put("attAction", r.getAttAction());*/
+						break;
+					}
+
+					case "CALIB_X":{
+						point.put("commentaire", r.getCommentaire());
+						point.put("type", r.getType());
+						point.put("X", r.getX());
+						point.put("THETA", r.getAngle());
+						break;
+					}
+					case "CALIB_Y":{
+						point.put("commentaire", r.getCommentaire());
+						point.put("type", r.getType());
+						point.put("Y", r.getY());
+						point.put("THETA", r.getAngle());
+						break;
+					}
+					case "CALIB_XY":{
+						point.put("commentaire", r.getCommentaire());
+						point.put("type", r.getType());
+						point.put("X", r.getX());
+						point.put("Y", r.getY());
+						point.put("THETA", r.getAngle());
 						break;
 					}
 					/*case "DeplacementX":{
@@ -309,7 +334,12 @@ public class MenuPanel extends JPanel{
 							//r.setBlocage((String)params.get("blocage"));
 							//r.setCoefCourbe((Double)params.get("coefCourbe"));
 							//r.setLissage((boolean)params.get("lissage"));
-							//r.setDerapage((boolean)params.get("derapage"));
+							if(params.get("slipping") == null) {
+								r.setDerapage(false);
+							}
+							else {
+								r.setDerapage((boolean)params.get("slipping"));
+							}
 							r.setTimeOut(Math.toIntExact((Long)params.get("timeout")));
 							r.setAction((String)params.get("action"));
 							//r.setAttAction((boolean)params.get("attAction"));
@@ -322,7 +352,26 @@ public class MenuPanel extends JPanel{
 							r.setAngle(Math.toIntExact((Long)params.get("THETA")));
 							break;
 						}
-						
+						case "CALIB_X":{
+							r.setCommentaire((String)params.get("comments"));
+							r.setX(Math.toIntExact((Long)params.get("X")));
+							r.setAngle(Math.toIntExact((Long)params.get("THETA")));
+
+							break;
+						}
+						case "CALIB_Y":{
+							r.setCommentaire((String)params.get("comments"));
+							r.setY(Math.toIntExact((Long)params.get("Y")));
+							r.setAngle(Math.toIntExact((Long)params.get("THETA")));
+							break;
+						}
+						case "CALIB_XY":{
+							r.setCommentaire((String)params.get("comments"));
+							r.setX(Math.toIntExact((Long)params.get("X")));
+							r.setY(Math.toIntExact((Long)params.get("Y")));
+							r.setAngle(Math.toIntExact((Long)params.get("angle")));
+							break;
+						}
 						/*case "DeplacementX":{
 							r.setCommentaire((String)params.get("commentaire"));
 							r.setX(Math.toIntExact((Long)params.get("X")));
@@ -449,8 +498,9 @@ public class MenuPanel extends JPanel{
 				 ListModel<Robot> liste = EditorPanel.list.getModel();
 				 EditorPanel.updateCoord();
 				 for(int i=0; i<liste.getSize();i++){
-					 liste.getElementAt(i).setX(-liste.getElementAt(i).getX());
-					 liste.getElementAt(i).setAngle(-liste.getElementAt(i).getAngle());
+					 liste.getElementAt(i).setX(3000-liste.getElementAt(i).getX());
+					 liste.getElementAt(i).setY(liste.getElementAt(i).getY());
+					 liste.getElementAt(i).setAngle((180-liste.getElementAt(i).getAngle()) % 360);
 				 }
 		   }
 	};

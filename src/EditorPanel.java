@@ -26,7 +26,7 @@ public class EditorPanel extends JPanel{
 	
 	//String[] listType = new String[]{"Deplacement","DeplacementX", "DeplacementY", "Angle", "Position", "RecalageX", "RecalageY", "RecalageXY", "DeplacementRelatif", "AngleRelatif"};
 
-	String[] listType = new String[]{"POSITION", "XY_ABSOLU", "THETA"};
+	String[] listType = new String[]{"POSITION", "XY_ABSOLU", "THETA", "CALIB_X", "CALIB_Y", "CALIB_XY"};
 	JComboBox strType = new JComboBox(listType);
 	
 	static JTextField strX = new JTextField("0");
@@ -50,6 +50,7 @@ public class EditorPanel extends JPanel{
 	ButtonGroup strSens = new ButtonGroup();
 	JRadioButton strAvant = new JRadioButton("Avant");
 	JRadioButton strArriere = new JRadioButton("Arrière");
+	JCheckBox btnDerapage = new JCheckBox("Dérapage");
 	
 	/*JLabel labelBlocage = new JLabel("Blocage :");
 	String[] listBlocage = new String[]{"aucun", "avant", "arriere", "avantG", "avantD", "arriereG", "arriereD"};
@@ -59,8 +60,7 @@ public class EditorPanel extends JPanel{
 	JTextField strCoefCourbe = new JTextField("0");
 	
 	JCheckBox btnLissage = new JCheckBox("Lissage");
-	
-	JCheckBox btnDerapage = new JCheckBox("Dérapage");
+
 	
 	JCheckBox btnAttAction = new JCheckBox("Attente Action");*/
 	
@@ -124,7 +124,7 @@ public class EditorPanel extends JPanel{
 		//gb.setConstraints(strBlocage, gbc);
 		//gb.setConstraints(strCoefCourbe, gbc);
 		gb.setConstraints(strTimeout, gbc);
-		//gb.setConstraints(btnDerapage, gbc);
+		gb.setConstraints(btnDerapage, gbc);
 		
 		//gb.setConstraints(strBlocage, gbc);
 		gb.setConstraints(strAction, gbc);
@@ -159,7 +159,7 @@ public class EditorPanel extends JPanel{
 //		this.add(labelBlocage);
 //		this.add(strBlocage);
 //		this.add(btnLissage);
-//		this.add(btnDerapage);
+		this.add(btnDerapage);
 //		this.add(btnAttAction);
 		this.add(labelTimeout);
 		this.add(strTimeout);
@@ -171,7 +171,7 @@ public class EditorPanel extends JPanel{
 		
 		strAvant.setSelected(true);
 //		btnAttAction.setSelected(false);
-//		btnDerapage.setSelected(false);
+		btnDerapage.setSelected(false);
 //		btnLissage.setSelected(false);
 		strType.setSelectedItem("Position");
 		
@@ -186,7 +186,7 @@ public class EditorPanel extends JPanel{
 		strDeltaDeplacement.addKeyListener(setDeltaDeplacement);
 		strAvant.addActionListener(avantSelected);
 //		btnAttAction.addActionListener(attActionSelected);
-//		btnDerapage.addActionListener(derapageSelected);
+		btnDerapage.addActionListener(derapageSelected);
 		strArriere.addActionListener(arriereSelected);
 //		strBlocage.addActionListener(blocageSelected);
 		strVitesse.addKeyListener(setVitesse);
@@ -248,11 +248,11 @@ public class EditorPanel extends JPanel{
 //		}
 //	};
 	
-//	ActionListener derapageSelected = new ActionListener(){
-//		public void actionPerformed(ActionEvent e)  {
-//			actualRobot.setDerapage(btnDerapage.isSelected());
-//		}
-//	};
+	ActionListener derapageSelected = new ActionListener(){
+		public void actionPerformed(ActionEvent e)  {
+			actualRobot.setDerapage(btnDerapage.isSelected());
+		}
+	};
 	
 //	ActionListener setCoefCourbe = new ActionListener(){
 //		public void actionPerformed(ActionEvent e)  {
@@ -336,7 +336,7 @@ public class EditorPanel extends JPanel{
 //		strCoefCourbe.setEnabled(true);
 //		strBlocage.setEnabled(true);
 //		btnLissage.setEnabled(true);
-//		btnDerapage.setEnabled(true);
+		btnDerapage.setEnabled(true);
 //		btnAttAction.setEnabled(true);
 		switch(type) {
 			case "THETA":{
@@ -347,7 +347,7 @@ public class EditorPanel extends JPanel{
 				strDeltaDeplacement.setEnabled(false);
 //				strCoefCourbe.setEnabled(false);
 //				btnLissage.setEnabled(false);
-//				btnDerapage.setEnabled(false);
+				btnDerapage.setEnabled(false);
 				break;
 			}
 			
@@ -381,47 +381,47 @@ public class EditorPanel extends JPanel{
 //				break;
 //			}
 //
-//			case "RecalageX":{
-//				strY.setEnabled(false);
-////				strAvant.setEnabled(false);
-////				strArriere.setEnabled(false);
-//				strDeltaAngle.setEnabled(false);
-//				strDeltaDeplacement.setEnabled(false);
-//				strVitesse.setEnabled(false);
-////				strCoefCourbe.setEnabled(false);
-////				strBlocage.setEnabled(false);
-////				btnLissage.setEnabled(false);
-////				btnDerapage.setEnabled(false);
-////				btnAttAction.setEnabled(false);
-//				break;
-//			}
-//			case "RecalageY":{
-//				strX.setEnabled(false);
-////				strAvant.setEnabled(false);
-////				strArriere.setEnabled(false);
-//				strDeltaAngle.setEnabled(false);
-//				strDeltaDeplacement.setEnabled(false);
-//				strVitesse.setEnabled(false);
-////				strCoefCourbe.setEnabled(false);
-////				strBlocage.setEnabled(false);
-////				btnLissage.setEnabled(false);
-////				btnDerapage.setEnabled(false);
-////				btnAttAction.setEnabled(false);
-//				break;
-//			}
-//			case "RecalageXY":{
-//				strAvant.setEnabled(false);
-//				strArriere.setEnabled(false);
-//				strDeltaAngle.setEnabled(false);
-//				strDeltaDeplacement.setEnabled(false);
-//				strVitesse.setEnabled(false);
+			case "CALIB_X":{
+				strY.setEnabled(false);
+				//strAvant.setEnabled(false);
+				//strArriere.setEnabled(false);
+				strDeltaAngle.setEnabled(false);
+				strDeltaDeplacement.setEnabled(false);
+				strVitesse.setEnabled(false);
 //				strCoefCourbe.setEnabled(false);
 //				strBlocage.setEnabled(false);
 //				btnLissage.setEnabled(false);
-//				btnDerapage.setEnabled(false);
+				btnDerapage.setEnabled(false);
 //				btnAttAction.setEnabled(false);
-//				break;
-//			}
+				break;
+			}
+			case "CALIB_Y":{
+				strX.setEnabled(false);
+				//strAvant.setEnabled(false);
+				//strArriere.setEnabled(false);
+				strDeltaAngle.setEnabled(false);
+				strDeltaDeplacement.setEnabled(false);
+				strVitesse.setEnabled(false);
+//				strCoefCourbe.setEnabled(false);
+//				strBlocage.setEnabled(false);
+//				btnLissage.setEnabled(false);
+				btnDerapage.setEnabled(false);
+//				btnAttAction.setEnabled(false);
+				break;
+			}
+			case "CALIB_XY":{
+				//strAvant.setEnabled(false);
+				//strArriere.setEnabled(false);
+				strDeltaAngle.setEnabled(false);
+				strDeltaDeplacement.setEnabled(false);
+				strVitesse.setEnabled(false);
+//				strCoefCourbe.setEnabled(false);
+//				strBlocage.setEnabled(false);
+//				btnLissage.setEnabled(false);
+				btnDerapage.setEnabled(false);
+//				btnAttAction.setEnabled(false);
+				break;
+			}
 //			case "DeplacementRelatif":{
 //				strAngle.setEnabled(false);
 //				break;
@@ -463,7 +463,7 @@ public class EditorPanel extends JPanel{
 //    		strCoefCourbe.setText(String.valueOf(actualRobot.getCoefCourbe()));
 //    		strBlocage.setSelectedItem(actualRobot.getBlocage());
 //    		btnLissage.setSelected(actualRobot.getLissage());
-//    		btnDerapage.setSelected(actualRobot.getDerapage());
+    		btnDerapage.setSelected(actualRobot.getDerapage());
 //    		btnAttAction.setSelected(actualRobot.getAttAction());
     		strTimeout.setText(String.valueOf(actualRobot.getTimeOut()));
     		strAction.setText(String.valueOf(actualRobot.getAction()));
