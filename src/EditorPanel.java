@@ -57,14 +57,14 @@ public class EditorPanel extends JPanel{
 	JComboBox strBlocage = new JComboBox(listBlocage);*/
 	
 	/*JLabel labelCoefCourbe = new JLabel("Coef courbe :");
-	JTextField strCoefCourbe = new JTextField("0");
+	JTextField strCoefCourbe = new JTextField("0");*/
 	
-	JCheckBox btnLissage = new JCheckBox("Lissage");
+	JCheckBox btnDetection = new JCheckBox("Détection");
 
 	
-	JCheckBox btnAttAction = new JCheckBox("Attente Action");*/
+	JCheckBox btnAttAction = new JCheckBox("Attente Action");
 	
-	JLabel labelTimeout = new JLabel("Time Out (Attente Action) :");
+	JLabel labelTimeout = new JLabel("Score :");
 	JTextField strTimeout= new JTextField("0");
 
 	
@@ -102,7 +102,7 @@ public class EditorPanel extends JPanel{
 		//gb.setConstraints(labelBlocage, gbc);
 		//gb.setConstraints(labelCoefCourbe, gbc);
 		gb.setConstraints(labelTimeout, gbc);
-		//gb.setConstraints(btnLissage, gbc);
+		gb.setConstraints(btnDetection, gbc);
 		gbc.gridwidth=2;
 		//gb.setConstraints(btnAttAction, gbc);
 		gbc.gridwidth=1;
@@ -158,7 +158,7 @@ public class EditorPanel extends JPanel{
 //		this.add(strCoefCourbe);
 //		this.add(labelBlocage);
 //		this.add(strBlocage);
-//		this.add(btnLissage);
+		this.add(btnDetection);
 		this.add(btnDerapage);
 //		this.add(btnAttAction);
 		this.add(labelTimeout);
@@ -172,7 +172,7 @@ public class EditorPanel extends JPanel{
 		strAvant.setSelected(true);
 //		btnAttAction.setSelected(false);
 		btnDerapage.setSelected(false);
-//		btnLissage.setSelected(false);
+		btnDetection.setSelected(false);
 		strType.setSelectedItem("Position");
 		
 		strType.addActionListener(typeSelected);
@@ -192,7 +192,7 @@ public class EditorPanel extends JPanel{
 		strVitesse.addKeyListener(setVitesse);
 		strTimeout.addKeyListener(setTimeout);
 //		strCoefCourbe.addActionListener(setCoefCourbe);
-//		btnLissage.addActionListener(lissageSelected);
+		btnDetection.addActionListener(detectionSelected);
 		strAction.addKeyListener(setAction);
 		commentaireArea.addKeyListener(setCommentaire);
 		typeChange(strType.getSelectedItem().toString());
@@ -238,7 +238,7 @@ public class EditorPanel extends JPanel{
 	
 	KeyAdapter setTimeout = new KeyAdapter(){
 		public void keyReleased(java.awt.event.KeyEvent e)  {					
-			actualRobot.setTimeOut(Integer.parseInt(strTimeout.getText()));
+			actualRobot.setPoints(Integer.parseInt(strTimeout.getText()));
 		}
 	};
 	
@@ -260,11 +260,11 @@ public class EditorPanel extends JPanel{
 //		}
 //	};
 	
-//	ActionListener lissageSelected = new ActionListener(){
-//		public void actionPerformed(ActionEvent e)  {
-//			actualRobot.setLissage(btnLissage.isSelected());
-//		}
-//	};
+	ActionListener detectionSelected = new ActionListener(){
+		public void actionPerformed(ActionEvent e)  {
+			actualRobot.setDetection(btnDetection.isSelected());
+		}
+	};
 	
 	KeyAdapter setAction = new KeyAdapter(){
 		public void keyReleased(java.awt.event.KeyEvent e)  {					
@@ -335,7 +335,7 @@ public class EditorPanel extends JPanel{
         
 //		strCoefCourbe.setEnabled(true);
 //		strBlocage.setEnabled(true);
-//		btnLissage.setEnabled(true);
+		btnDetection.setEnabled(true);
 		btnDerapage.setEnabled(true);
 //		btnAttAction.setEnabled(true);
 		switch(type) {
@@ -346,7 +346,7 @@ public class EditorPanel extends JPanel{
 				strArriere.setEnabled(false);
 				strDeltaDeplacement.setEnabled(false);
 //				strCoefCourbe.setEnabled(false);
-//				btnLissage.setEnabled(false);
+//				btnDetection.setEnabled(false);
 				btnDerapage.setEnabled(false);
 				break;
 			}
@@ -390,7 +390,7 @@ public class EditorPanel extends JPanel{
 				strVitesse.setEnabled(false);
 //				strCoefCourbe.setEnabled(false);
 //				strBlocage.setEnabled(false);
-//				btnLissage.setEnabled(false);
+//				btnDetection.setEnabled(false);
 				btnDerapage.setEnabled(false);
 //				btnAttAction.setEnabled(false);
 				break;
@@ -404,7 +404,7 @@ public class EditorPanel extends JPanel{
 				strVitesse.setEnabled(false);
 //				strCoefCourbe.setEnabled(false);
 //				strBlocage.setEnabled(false);
-//				btnLissage.setEnabled(false);
+//				btnDetection.setEnabled(false);
 				btnDerapage.setEnabled(false);
 //				btnAttAction.setEnabled(false);
 				break;
@@ -417,7 +417,7 @@ public class EditorPanel extends JPanel{
 				strVitesse.setEnabled(false);
 //				strCoefCourbe.setEnabled(false);
 //				strBlocage.setEnabled(false);
-//				btnLissage.setEnabled(false);
+//				btnDetection.setEnabled(false);
 				btnDerapage.setEnabled(false);
 //				btnAttAction.setEnabled(false);
 				break;
@@ -434,7 +434,7 @@ public class EditorPanel extends JPanel{
 //				strArriere.setEnabled(false);
 //				strDeltaDeplacement.setEnabled(false);
 //				strCoefCourbe.setEnabled(false);
-//				btnLissage.setEnabled(false);
+//				btnDetection.setEnabled(false);
 //				btnDerapage.setEnabled(false);
 //				btnAttAction.setEnabled(false);
 //				break;
@@ -462,10 +462,10 @@ public class EditorPanel extends JPanel{
     		strVitesse.setText(String.valueOf(actualRobot.getVitesse()));
 //    		strCoefCourbe.setText(String.valueOf(actualRobot.getCoefCourbe()));
 //    		strBlocage.setSelectedItem(actualRobot.getBlocage());
-//    		btnLissage.setSelected(actualRobot.getLissage());
+    		btnDetection.setSelected(actualRobot.isDetection());
     		btnDerapage.setSelected(actualRobot.getDerapage());
 //    		btnAttAction.setSelected(actualRobot.getAttAction());
-    		strTimeout.setText(String.valueOf(actualRobot.getTimeOut()));
+    		strTimeout.setText(String.valueOf(actualRobot.getPoints()));
     		strAction.setText(String.valueOf(actualRobot.getAction()));
     		commentaireArea.setText(actualRobot.getCommentaire());
     		typeChange(actualRobot.getType());

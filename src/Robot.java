@@ -12,9 +12,9 @@ public class Robot {
 	private String sens;
 	private String blocage;
 	private double coefCourbe;
-	private boolean lissage;
+	private boolean detection;
 	private boolean derapage;
-	private int timeOut;
+	private int points;
 	private String action;
 	private boolean attAction;
 	private String commentaire;
@@ -33,13 +33,22 @@ public class Robot {
 		sens="avant";
 		blocage="aucun";
 		coefCourbe=0;
-		lissage=false;
+		detection=false;
 		derapage=false;
-		timeOut=0;
+		points=0;
 		action="null";
 		attAction=false;
 		commentaire="";
 	}
+
+	public boolean isDetection() {
+		return detection;
+	}
+
+	public void setDetection(boolean detection) {
+		this.detection = detection;
+	}
+
 	public Robot(int x, int y, int r){
 		type = "POSITION";
 		this.x=x;
@@ -51,9 +60,9 @@ public class Robot {
 		sens="avant";
 		blocage="aucun";
 		coefCourbe=0;
-		lissage=false;
+		detection=false;
 		derapage=false;
-		timeOut=0;
+		points=0;
 		action="null";
 		attAction=false;
 		commentaire="";
@@ -70,9 +79,9 @@ public class Robot {
 		sens= r.sens;
 		blocage= r.blocage;
 		coefCourbe= r.coefCourbe;
-		lissage= r.lissage;
-		derapage= r.derapage;
-		timeOut= r.timeOut;
+		detection = false;
+		derapage= false;
+		points= 0;
 		action= "null";
 		attAction= false;
 		commentaire="";
@@ -197,15 +206,7 @@ public class Robot {
 		derapage=b;
 	}
 	
-	
-	boolean getLissage(){
-		return lissage;
-	}
-	
-	void setLissage(boolean b){
-		lissage = b;
-	}
-	
+
 	double getCoefCourbe(){
 		return coefCourbe;
 	}
@@ -229,15 +230,15 @@ public class Robot {
 	void setDeltaAngle(double d){
 		deltaAngle = d;
 	}
-	
-	void setTimeOut(int i) {
-		timeOut = i;
+
+	public void setPoints(int points) {
+		this.points = points;
 	}
-	
-	int getTimeOut() {
-		return timeOut;
+
+	public int getPoints() {
+		return points;
 	}
-	
+
 	String getAction() {
 		return action;
 	}
