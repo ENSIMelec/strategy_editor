@@ -15,6 +15,7 @@ public class Robot {
 	private boolean detection;
 	private boolean derapage;
 	private int points;
+	private int timeout;
 	private String action;
 	private boolean attAction;
 	private String commentaire;
@@ -39,6 +40,7 @@ public class Robot {
 		action="null";
 		attAction=false;
 		commentaire="";
+		timeout=0;
 	}
 
 	public boolean isDetection() {
@@ -66,6 +68,7 @@ public class Robot {
 		action="null";
 		attAction=false;
 		commentaire="";
+		timeout = 0;
 	}
 	
 	public Robot(Robot r) {
@@ -85,6 +88,7 @@ public class Robot {
 		action= "null";
 		attAction= false;
 		commentaire="";
+		timeout = r.timeout;
 	}
 	
 	int getX(){
@@ -93,7 +97,15 @@ public class Robot {
 	void setX(int x){
 		this.x = x;
 	}
-	
+
+	public int getTimeout() {
+		return timeout;
+	}
+
+	public void setTimeout(int timeout) {
+		this.timeout = timeout;
+	}
+
 	/*int getDispX(){
 		return (getX()*3/10)+405;
 	}

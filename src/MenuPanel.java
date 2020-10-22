@@ -56,13 +56,13 @@ public class MenuPanel extends JPanel{
 		menuInverse.addActionListener(inverseStrat);
 		//menuInverse.setEnabled(false);
 		
-		 roballs = new JRadioButton("Krabs");
-		 roballs.setSelected(true);
-		 bobby = new JRadioButton("Bobby 5K");
-		 bobby.setEnabled(false);
-		 robot_grp = new ButtonGroup();
-		 robot_grp.add(roballs);
-		 robot_grp.add(bobby);
+		roballs = new JRadioButton("Krabs");
+		roballs.setSelected(true);
+		bobby = new JRadioButton("Bobby 5K");
+		bobby.setEnabled(false);
+		robot_grp = new ButtonGroup();
+		robot_grp.add(roballs);
+		robot_grp.add(bobby);
 		
 		option.add(menuDrawLine);
 		option.add(menuDrawAll);
@@ -117,6 +117,7 @@ public class MenuPanel extends JPanel{
 						// score/detection
 						point.put("score", r.getPoints());
 						point.put("detection", r.isDetection());
+						point.put("timeout", r.getTimeout());
 
 						break;
 					}
@@ -136,7 +137,7 @@ public class MenuPanel extends JPanel{
 						// score/detection
 						point.put("detection", r.isDetection());
 						point.put("score", r.getPoints());
-						//point.put("attAction", r.getAttAction());
+						point.put("timeout", r.getTimeout());
 						break;
 					}
 					case "POSITION":{
@@ -338,6 +339,8 @@ public class MenuPanel extends JPanel{
 							} else {
 								r.setPoints(Math.toIntExact((Long) params.get("score")));
 							}
+							// timeout
+							r.setTimeout(Math.toIntExact((Long)params.get("timeout")));
 							break;
 						}
 						
@@ -371,7 +374,7 @@ public class MenuPanel extends JPanel{
 							} else {
 								r.setPoints(Math.toIntExact((Long) params.get("score")));
 							}
-							//r.setTimeOut(Math.toIntExact((Long)params.get("timeout")));
+							r.setTimeout(Math.toIntExact((Long)params.get("timeout")));
 							r.setAction((String)params.get("action"));
 							//r.setAttAction((boolean)params.get("attAction"));
 							break;

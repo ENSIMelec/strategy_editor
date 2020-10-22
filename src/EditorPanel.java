@@ -64,8 +64,11 @@ public class EditorPanel extends JPanel{
 	
 	JCheckBox btnAttAction = new JCheckBox("Attente Action");
 	
-	JLabel labelTimeout = new JLabel("Score :");
-	JTextField strTimeout= new JTextField("0");
+	JLabel labelScore  = new JLabel("Score :");
+	JTextField strScore = new JTextField("0");
+
+	JLabel labelTimeout = new JLabel("Timeout  :");
+	JTextField strTimeout = new JTextField("0");
 
 	
 	JTextField strAction= new JTextField("null");
@@ -101,6 +104,7 @@ public class EditorPanel extends JPanel{
 		gb.setConstraints(labelVitesse, gbc);
 		//gb.setConstraints(labelBlocage, gbc);
 		//gb.setConstraints(labelCoefCourbe, gbc);
+		gb.setConstraints(labelScore, gbc);
 		gb.setConstraints(labelTimeout, gbc);
 		gb.setConstraints(btnDetection, gbc);
 		gbc.gridwidth=2;
@@ -123,6 +127,7 @@ public class EditorPanel extends JPanel{
 		gb.setConstraints(strVitesse, gbc);
 		//gb.setConstraints(strBlocage, gbc);
 		//gb.setConstraints(strCoefCourbe, gbc);
+		gb.setConstraints(strScore, gbc);
 		gb.setConstraints(strTimeout, gbc);
 		gb.setConstraints(btnDerapage, gbc);
 		
@@ -161,8 +166,11 @@ public class EditorPanel extends JPanel{
 		this.add(btnDetection);
 		this.add(btnDerapage);
 //		this.add(btnAttAction);
+		this.add(labelScore);
+		this.add(strScore);
 		this.add(labelTimeout);
 		this.add(strTimeout);
+
 		this.add(labelAction);
 		this.add(strAction);
 		this.add(labelCommentaire);
@@ -190,6 +198,7 @@ public class EditorPanel extends JPanel{
 		strArriere.addActionListener(arriereSelected);
 //		strBlocage.addActionListener(blocageSelected);
 		strVitesse.addKeyListener(setVitesse);
+		strScore.addKeyListener(setScore);
 		strTimeout.addKeyListener(setTimeout);
 //		strCoefCourbe.addActionListener(setCoefCourbe);
 		btnDetection.addActionListener(detectionSelected);
@@ -236,9 +245,15 @@ public class EditorPanel extends JPanel{
 		}
 	};
 	
-	KeyAdapter setTimeout = new KeyAdapter(){
+	KeyAdapter setScore = new KeyAdapter(){
 		public void keyReleased(java.awt.event.KeyEvent e)  {					
-			actualRobot.setPoints(Integer.parseInt(strTimeout.getText()));
+			actualRobot.setPoints(Integer.parseInt(strScore.getText()));
+		}
+	};
+
+	KeyAdapter setTimeout = new KeyAdapter(){
+		public void keyReleased(java.awt.event.KeyEvent e)  {
+			actualRobot.setTimeout(Integer.parseInt(strTimeout.getText()));
 		}
 	};
 	
@@ -331,7 +346,8 @@ public class EditorPanel extends JPanel{
 		strDeltaDeplacement.setEnabled(true);
 		strVitesse.setEnabled(true);
         strAction.setEnabled(true);
-        strTimeout.setEnabled(true);
+        strScore.setEnabled(true);
+		strTimeout.setEnabled(true);
         
 //		strCoefCourbe.setEnabled(true);
 //		strBlocage.setEnabled(true);
@@ -393,6 +409,8 @@ public class EditorPanel extends JPanel{
 //				btnDetection.setEnabled(false);
 				btnDerapage.setEnabled(false);
 //				btnAttAction.setEnabled(false);
+				labelScore.setEnabled(false);
+				labelTimeout.setEnabled(false);
 				break;
 			}
 			case "CALIB_Y":{
@@ -407,6 +425,8 @@ public class EditorPanel extends JPanel{
 //				btnDetection.setEnabled(false);
 				btnDerapage.setEnabled(false);
 //				btnAttAction.setEnabled(false);
+				labelScore.setEnabled(false);
+				labelTimeout.setEnabled(false);
 				break;
 			}
 			case "CALIB_XY":{
@@ -420,6 +440,8 @@ public class EditorPanel extends JPanel{
 //				btnDetection.setEnabled(false);
 				btnDerapage.setEnabled(false);
 //				btnAttAction.setEnabled(false);
+				labelScore.setEnabled(false);
+				labelTimeout.setEnabled(false);
 				break;
 			}
 //			case "DeplacementRelatif":{
@@ -465,7 +487,8 @@ public class EditorPanel extends JPanel{
     		btnDetection.setSelected(actualRobot.isDetection());
     		btnDerapage.setSelected(actualRobot.getDerapage());
 //    		btnAttAction.setSelected(actualRobot.getAttAction());
-    		strTimeout.setText(String.valueOf(actualRobot.getPoints()));
+    		strScore.setText(String.valueOf(actualRobot.getPoints()));
+			strTimeout.setText(String.valueOf(actualRobot.getTimeout()));
     		strAction.setText(String.valueOf(actualRobot.getAction()));
     		commentaireArea.setText(actualRobot.getCommentaire());
     		typeChange(actualRobot.getType());
