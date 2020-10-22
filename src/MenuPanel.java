@@ -324,7 +324,6 @@ public class MenuPanel extends JPanel{
 							r.setDeltaAngle((Double)params.get("angle_tolerance"));
 							r.setVitesse(Math.toIntExact((Long)params.get("speed")));
 							//r.setBlocage((String)params.get("blocage"));
-							r.setPoints(Math.toIntExact((Long)params.get("score")));
 							r.setAction((String)params.get("action"));
 
 							// detection/score
@@ -332,13 +331,12 @@ public class MenuPanel extends JPanel{
 								r.setDetection(false);
 							}
 							else {
-								r.setDerapage((boolean)params.get("detection"));
+								r.setDetection((boolean)params.get("detection"));
 							}
-							if(params.get("detection") == null) {
+							if(params.get("score") == null) {
 								r.setPoints(0);
-							}
-							else {
-								r.setPoints(Math.toIntExact((Long)params.get("score")));
+							} else {
+								r.setPoints(Math.toIntExact((Long) params.get("score")));
 							}
 							break;
 						}
@@ -361,18 +359,17 @@ public class MenuPanel extends JPanel{
 							else {
 								r.setDerapage((boolean)params.get("slipping"));
 							}
-							// detection/score
+							/// detection/score
 							if(params.get("detection") == null) {
 								r.setDetection(false);
 							}
 							else {
-								r.setDerapage((boolean)params.get("detection"));
+								r.setDetection((boolean)params.get("detection"));
 							}
-							if(params.get("detection") == null) {
+							if(params.get("score") == null) {
 								r.setPoints(0);
-							}
-							else {
-								r.setPoints(Math.toIntExact((Long)params.get("score")));
+							} else {
+								r.setPoints(Math.toIntExact((Long) params.get("score")));
 							}
 							//r.setTimeOut(Math.toIntExact((Long)params.get("timeout")));
 							r.setAction((String)params.get("action"));
