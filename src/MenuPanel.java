@@ -532,9 +532,23 @@ public class MenuPanel extends JPanel{
 				 ListModel<Robot> liste = EditorPanel.list.getModel();
 				 EditorPanel.updateCoord();
 				 for(int i=0; i<liste.getSize();i++){
-					 liste.getElementAt(i).setX(3000-liste.getElementAt(i).getX());
+					 liste.getElementAt(i).setX(2983-liste.getElementAt(i).getX());
 					 liste.getElementAt(i).setY(liste.getElementAt(i).getY());
 					 liste.getElementAt(i).setAngle((180-liste.getElementAt(i).getAngle()) % 360);
+
+					 if(liste.getElementAt(i).getAction().equals("OuvrirPince_G")) {
+						 liste.getElementAt(i).setAction("OuvrirPince_D");
+						 //System.out.println(liste.getElementAt(i).getAction());
+					 }
+					 if(liste.getElementAt(i).getAction().equals("OuvrirPince_D")) {
+						 liste.getElementAt(i).setAction("OuvrirPince_G");
+					 }
+					 if(liste.getElementAt(i).getAction().equals("SortirBaguette_G")) {
+						 liste.getElementAt(i).setAction("SortirBaguette_D");
+					 }
+					 if(liste.getElementAt(i).getAction().equals("RangerBaguette_G")) {
+						 liste.getElementAt(i).setAction("RangerBaguette_D");
+					 }
 				 }
 		   }
 	};
