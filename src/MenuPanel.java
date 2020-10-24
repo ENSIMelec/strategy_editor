@@ -536,19 +536,41 @@ public class MenuPanel extends JPanel{
 					 liste.getElementAt(i).setY(liste.getElementAt(i).getY());
 					 liste.getElementAt(i).setAngle((180-liste.getElementAt(i).getAngle()) % 360);
 
-					 if(liste.getElementAt(i).getAction().equals("OuvrirPince_G")) {
-						 liste.getElementAt(i).setAction("OuvrirPince_D");
-						 //System.out.println(liste.getElementAt(i).getAction());
+					 switch (liste.getElementAt(i).getAction()) {
+						 case "OuvrirPince_G":
+							 liste.getElementAt(i).setAction("OuvrirPince_D");
+						 	break;
+						 case "OuvrirPince_D":
+							 liste.getElementAt(i).setAction("OuvrirPince_G");
+							 break;
+						 case "SortirBaguette_G":
+							 liste.getElementAt(i).setAction("SortirBaguette_D");
+							 break;
+						 case "RangerBaguette_G":
+							 liste.getElementAt(i).setAction("RangerBaguette_D");
+							 break;
+
+						 case "SortirBaguette_D":
+							 liste.getElementAt(i).setAction("SortirBaguette_G");
+							 break;
+						 case "RangerBaguette_D":
+							 liste.getElementAt(i).setAction("RangerBaguette_G");
+							 break;
+
 					 }
-					 if(liste.getElementAt(i).getAction().equals("OuvrirPince_D")) {
-						 liste.getElementAt(i).setAction("OuvrirPince_G");
-					 }
-					 if(liste.getElementAt(i).getAction().equals("SortirBaguette_G")) {
-						 liste.getElementAt(i).setAction("SortirBaguette_D");
-					 }
-					 if(liste.getElementAt(i).getAction().equals("RangerBaguette_G")) {
-						 liste.getElementAt(i).setAction("RangerBaguette_D");
-					 }
+
+//					 if(liste.getElementAt(i).getAction().equals("OuvrirPince_G")) {
+//						 liste.getElementAt(i).setAction("OuvrirPince_D");
+//					 }
+//					 else if(liste.getElementAt(i).getAction().equals("OuvrirPince_D")) {
+//						 liste.getElementAt(i).setAction("OuvrirPince_G");
+//					 }
+//					 else if(liste.getElementAt(i).getAction().equals("SortirBaguette_G")) {
+//						 liste.getElementAt(i).setAction("SortirBaguette_D");
+//					 }
+//					 else if (liste.getElementAt(i).getAction().equals("RangerBaguette_G")) {
+//						 liste.getElementAt(i).setAction("RangerBaguette_D");
+//					 }
 				 }
 		   }
 	};
