@@ -536,41 +536,24 @@ public class MenuPanel extends JPanel{
 					 liste.getElementAt(i).setY(liste.getElementAt(i).getY());
 					 liste.getElementAt(i).setAngle((180-liste.getElementAt(i).getAngle()) % 360);
 
-					 switch (liste.getElementAt(i).getAction()) {
-						 case "OuvrirPince_G":
-							 liste.getElementAt(i).setAction("OuvrirPince_D");
-						 	break;
-						 case "OuvrirPince_D":
-							 liste.getElementAt(i).setAction("OuvrirPince_G");
-							 break;
-						 case "SortirBaguette_G":
-							 liste.getElementAt(i).setAction("SortirBaguette_D");
-							 break;
-						 case "RangerBaguette_G":
-							 liste.getElementAt(i).setAction("RangerBaguette_D");
-							 break;
 
-						 case "SortirBaguette_D":
-							 liste.getElementAt(i).setAction("SortirBaguette_G");
-							 break;
-						 case "RangerBaguette_D":
-							 liste.getElementAt(i).setAction("RangerBaguette_G");
-							 break;
+					 String[] action = (liste.getElementAt(i).getAction().split("_"));
 
+					 String orientation = action[action.length - 1];
+					 // construction du nom
+					 StringBuilder nom = new StringBuilder();
+					 for(int j = 0; j < action.length - 1; j++) {
+						 nom.append(action[j]);
+						 nom.append("_");
 					 }
 
-//					 if(liste.getElementAt(i).getAction().equals("OuvrirPince_G")) {
-//						 liste.getElementAt(i).setAction("OuvrirPince_D");
-//					 }
-//					 else if(liste.getElementAt(i).getAction().equals("OuvrirPince_D")) {
-//						 liste.getElementAt(i).setAction("OuvrirPince_G");
-//					 }
-//					 else if(liste.getElementAt(i).getAction().equals("SortirBaguette_G")) {
-//						 liste.getElementAt(i).setAction("SortirBaguette_D");
-//					 }
-//					 else if (liste.getElementAt(i).getAction().equals("RangerBaguette_G")) {
-//						 liste.getElementAt(i).setAction("RangerBaguette_D");
-//					 }
+					 if(orientation.compareTo("D") == 0) {
+						 liste.getElementAt(i).setAction(nom + "G");
+					 }
+					 if(orientation.compareTo("G") == 0) {
+						 liste.getElementAt(i).setAction(nom + "D");
+					 }
+
 				 }
 		   }
 	};
